@@ -6,4 +6,7 @@
 //  Copyright © 2017 HAPILABS LIMITED. All rights reserved.
 //
 
-static NSString * const landingPageURL      = @"http://shop.gerald.ph/";
+static NSString * const landingPageLiveURL  = @"http://shop.gerald.ph/";
+static NSString * const landingPageQCURL    = @"http://shop.gerald.ph/";
+
+static NSString * const appName             = @"GERALD.ph";

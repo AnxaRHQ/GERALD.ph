@@ -119,8 +119,20 @@ class ViewController: UIViewController, UIWebViewDelegate
     
     func loadURL()
     {
-        let requestURL = NSURL(string:landingPageURL)
-        let request = NSURLRequest.init(url: requestURL! as URL)
+        let requestURL = NSURL(string:landingPageQCURL)
+        let request : NSMutableURLRequest = NSMutableURLRequest.init(url: requestURL! as URL)
+        
+        /*Add User-agent*/
+        
+        var userAgent = webView.stringByEvaluatingJavaScript(from: "navigator.userAgent")
+        userAgent = NSString(format: "%@/%@ Apple/%@ Mobile %@", appName, Bundle.main.infoDictionary?["CFBundleVersion"] as! CVarArg, self.platform(), userAgent!) as String
+        
+        print("userAgent: \(String(describing: userAgent))")
+        
+        request.setValue(userAgent, forHTTPHeaderField: "User-Agent")
+        
+        /*Load URL*/
+        
         webView.loadRequest(request as URLRequest)
     }
     
@@ -135,6 +147,8 @@ class ViewController: UIViewController, UIWebViewDelegate
     
     func webView(_ webView: UIWebView, didFailLoadWithError error: Error)
     {
+        print("webView-url: \(String(describing: webView.request?.url?.absoluteString))")
+        
         self.stopAILoader()
         
         self.displayAlert(title: "", message: error.localizedDescription)
@@ -170,5 +184,14 @@ class ViewController: UIViewController, UIWebViewDelegate
         
         // show the alert
         self.present(alert, animated: true, completion: nil)
+    }
+    
+    // MARK: - Get Device Name
+    
+    func platform() -> String
+    {
+        var sysinfo = utsname()
+        uname(&sysinfo)
+        return String(bytes: Data(bytes: &sysinfo.machine, count: Int(_SYS_NAMELEN)), encoding: .ascii)!.trimmingCharacters(in: .controlCharacters)
     }
 }
