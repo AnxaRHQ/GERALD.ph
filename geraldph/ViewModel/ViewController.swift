@@ -16,6 +16,9 @@ class ViewController: UIViewController, UIWebViewDelegate
     
     @IBOutlet weak var webView: UIWebView!
     @IBOutlet weak var ai_loader: UIActivityIndicatorView!
+    @IBOutlet weak var backButton: UIBarButtonItem!
+    @IBOutlet weak var forwardButton: UIBarButtonItem!
+    @IBOutlet weak var refreshButton: UIBarButtonItem!
     
     // MARK: - View Management
     
@@ -138,11 +141,16 @@ class ViewController: UIViewController, UIWebViewDelegate
     
     // MARK: - UIWebView Delegate Methods
     
+    func webViewDidStartLoad(_ webView: UIWebView)
+    {
+        self.updateButtons()
+    }
+    
     func webViewDidFinishLoad(_ webView: UIWebView)
     {
-        /*Stop Activity Indicator*/
-        
         self.stopAILoader()
+        
+        self.updateButtons()
     }
     
     func webView(_ webView: UIWebView, didFailLoadWithError error: Error)
@@ -152,6 +160,31 @@ class ViewController: UIViewController, UIWebViewDelegate
         self.stopAILoader()
         
         self.displayAlert(title: "", message: error.localizedDescription)
+        
+        self.updateButtons()
+    }
+    
+    // MARK: - Button Actions
+    
+    func updateButtons()
+    {
+        self.backButton.isEnabled       = self.webView.canGoBack
+        self.forwardButton.isEnabled    = self.webView.canGoForward
+    }
+    
+    @IBAction func goBackButtonTapped(_ sender: UIBarButtonItem)
+    {
+        self.webView.goBack()
+    }
+    
+    @IBAction func forwardButtonTapped(_ sender: UIBarButtonItem)
+    {
+        self.webView.goForward()
+    }
+    
+    @IBAction func refreshButtonTapped(_ sender: UIBarButtonItem)
+    {
+        self.webView.reload()
     }
     
     // MARK: - Activity Indicator Methods
