@@ -78,8 +78,8 @@
                         <outlet property="ai_loader" destination="GmY-2P-kxa" id="1ak-N6-8sb"/>
                         <outlet property="backButton" destination="foA-bb-di7" id="HyR-Ft-chy"/>
                         <outlet property="forwardButton" destination="ioX-G5-ZnO" id="5fW-Tp-Tzf"/>
+                        <outlet property="mainWebview" destination="4Z6-tH-GNv" id="kG3-Xg-LAH"/>
                         <outlet property="refreshButton" destination="Q2f-B6-j7c" id="zlZ-bx-TxP"/>
-                        <outlet property="webView" destination="4Z6-tH-GNv" id="LR7-hh-8Ss"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

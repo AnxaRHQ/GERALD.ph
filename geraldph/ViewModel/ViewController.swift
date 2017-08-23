@@ -7,18 +7,19 @@
 //
 
 import UIKit
+import AFNetworking
 
 class ViewController: UIViewController, UIWebViewDelegate
 {
     // MARK: - IBOutlet
     
-    // MARK: - Variables
-    
-    @IBOutlet weak var webView: UIWebView!
+    @IBOutlet weak var mainWebview: UIWebView!
     @IBOutlet weak var ai_loader: UIActivityIndicatorView!
     @IBOutlet weak var backButton: UIBarButtonItem!
     @IBOutlet weak var forwardButton: UIBarButtonItem!
     @IBOutlet weak var refreshButton: UIBarButtonItem!
+    
+    // MARK: - Variables
     
     // MARK: - View Management
     
@@ -108,9 +109,9 @@ class ViewController: UIViewController, UIWebViewDelegate
                 
                 /*Reload WebView*/
                 
-                self.webView.reload()
+                self.mainWebview.reload()
                 
-                if (self.webView.request?.url?.absoluteString.characters.count == 0)
+                if (self.mainWebview.request?.url?.absoluteString.characters.count == 0)
                 {
                     self.loadURL()
                 }
@@ -122,21 +123,28 @@ class ViewController: UIViewController, UIWebViewDelegate
     
     func loadURL()
     {
-        let requestURL = NSURL(string:landingPageQCURL)
+        let requestURL = NSURL(string:landingPageLiveURL)
         let request : NSMutableURLRequest = NSMutableURLRequest.init(url: requestURL! as URL)
         
-        /*Add User-agent*/
+        /*Allow Unverified SSL Certificate*/
         
-        var userAgent = webView.stringByEvaluatingJavaScript(from: "navigator.userAgent")
-        userAgent = NSString(format: "%@/%@ Apple/%@ Mobile %@", appName, Bundle.main.infoDictionary?["CFBundleVersion"] as! CVarArg, self.platform(), userAgent!) as String
+        mainWebview.sessionManager.securityPolicy.allowInvalidCertificates  = true
         
-        print("userAgent: \(String(describing: userAgent))")
-        
-        request.setValue(userAgent, forHTTPHeaderField: "User-Agent")
+        mainWebview.sessionManager.securityPolicy.validatesDomainName       = false
         
         /*Load URL*/
         
-        webView.loadRequest(request as URLRequest)
+        mainWebview.loadRequest(request as URLRequest, progress: nil, success: { (response, html) in
+            
+            self.stopAILoader()
+            
+            return html
+            
+        }, failure: { (error) in
+            
+            self.stopAILoader()
+            
+        })
     }
     
     // MARK: - UIWebView Delegate Methods
@@ -159,32 +167,39 @@ class ViewController: UIViewController, UIWebViewDelegate
         
         self.stopAILoader()
         
-        self.displayAlert(title: "", message: error.localizedDescription)
-        
         self.updateButtons()
+        
+        if ((error as NSError).code == NSURLErrorNetworkConnectionLost || (error as NSError).code == NSURLErrorNotConnectedToInternet)
+        {
+            self.displayAlert(title: "", message: error.localizedDescription)
+        }
+        else
+        {
+            print("error: \(error.localizedDescription)")
+        }
     }
     
     // MARK: - Button Actions
     
     func updateButtons()
     {
-        self.backButton.isEnabled       = self.webView.canGoBack
-        self.forwardButton.isEnabled    = self.webView.canGoForward
+        self.backButton.isEnabled       = self.mainWebview.canGoBack
+        self.forwardButton.isEnabled    = self.mainWebview.canGoForward
     }
     
     @IBAction func goBackButtonTapped(_ sender: UIBarButtonItem)
     {
-        self.webView.goBack()
+        self.mainWebview.goBack()
     }
     
     @IBAction func forwardButtonTapped(_ sender: UIBarButtonItem)
     {
-        self.webView.goForward()
+        self.mainWebview.goForward()
     }
     
     @IBAction func refreshButtonTapped(_ sender: UIBarButtonItem)
     {
-        self.webView.reload()
+        self.mainWebview.reload()
     }
     
     // MARK: - Activity Indicator Methods
@@ -217,14 +232,5 @@ class ViewController: UIViewController, UIWebViewDelegate
         
         // show the alert
         self.present(alert, animated: true, completion: nil)
-    }
-    
-    // MARK: - Get Device Name
-    
-    func platform() -> String
-    {
-        var sysinfo = utsname()
-        uname(&sysinfo)
-        return String(bytes: Data(bytes: &sysinfo.machine, count: Int(_SYS_NAMELEN)), encoding: .ascii)!.trimmingCharacters(in: .controlCharacters)
     }
 }

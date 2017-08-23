@@ -21,6 +21,8 @@
 
 #import <Foundation/Foundation.h>
 #import <TargetConditionals.h>
+#import <sys/utsname.h>
+#import <objc/runtime.h>
 
 #if TARGET_OS_IOS || TARGET_OS_TV
 #import <UIKit/UIKit.h>
