@@ -18,6 +18,7 @@ class ViewController: UIViewController, UIWebViewDelegate
     @IBOutlet weak var backButton: UIBarButtonItem!
     @IBOutlet weak var forwardButton: UIBarButtonItem!
     @IBOutlet weak var refreshButton: UIBarButtonItem!
+    @IBOutlet weak var launchScreenImage: UIImageView!
     
     // MARK: - Variables
     
@@ -132,19 +133,18 @@ class ViewController: UIViewController, UIWebViewDelegate
         
         mainWebview.sessionManager.securityPolicy.validatesDomainName       = false
         
+        var userAgent = mainWebview.stringByEvaluatingJavaScript(from: "navigator.userAgent")
+        
+        /*set new value for user agent*/
+        userAgent = NSString(format: "%@/%@ %@ Mobile %@", "GERALD.ph", Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as! NSString, deviceName(), userAgent!) as String
+        
+        //print("userAgent: \(String(describing: userAgent))")
+        
         /*Load URL*/
         
-        mainWebview.loadRequest(request as URLRequest, progress: nil, success: { (response, html) in
-            
-            self.stopAILoader()
-            
-            return html
-            
-        }, failure: { (error) in
-            
-            self.stopAILoader()
-            
-        })
+        request.setValue(userAgent, forHTTPHeaderField: "User-Agent")
+        
+        mainWebview.loadRequest(request as URLRequest)
     }
     
     // MARK: - UIWebView Delegate Methods
@@ -159,6 +159,15 @@ class ViewController: UIViewController, UIWebViewDelegate
         self.stopAILoader()
         
         self.updateButtons()
+        
+        let when = DispatchTime.now() + 5
+        
+        DispatchQueue.main.asyncAfter(deadline: when)
+        {
+            /*Hide UIImage*/
+        
+            self.launchScreenImage.isHidden = true
+        }
     }
     
     func webView(_ webView: UIWebView, didFailLoadWithError error: Error)
@@ -232,5 +241,16 @@ class ViewController: UIViewController, UIWebViewDelegate
         
         // show the alert
         self.present(alert, animated: true, completion: nil)
+    }
+    
+    // MARK: - Get Device Name
+    
+    func deviceName() -> String
+    {
+        var systemInfo = utsname()
+        uname(&systemInfo)
+        let model = String(bytes: Data(bytes: &systemInfo.machine, count: Int(_SYS_NAMELEN)), encoding: .ascii)!.trimmingCharacters(in: .controlCharacters)
+        
+        return "Apple/\(model)"
     }
 }

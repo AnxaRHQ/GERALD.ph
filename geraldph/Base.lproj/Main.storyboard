@@ -60,11 +60,18 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="vIV-fQ-PrJ"/>
                                 </connections>
                             </webView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SplashImage" translatesAutoresizingMaskIntoConstraints="NO" id="zL5-vE-sQJ">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="zL5-vE-sQJ" secondAttribute="bottom" id="4nx-R5-iST"/>
                             <constraint firstItem="ILc-RK-VId" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="8mK-Aq-PzT"/>
+                            <constraint firstAttribute="trailing" secondItem="zL5-vE-sQJ" secondAttribute="trailing" id="DAg-N9-BbN"/>
+                            <constraint firstItem="zL5-vE-sQJ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Erj-wx-uwK"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="ILc-RK-VId" secondAttribute="bottom" id="Sue-zT-46e"/>
+                            <constraint firstItem="zL5-vE-sQJ" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="cnX-29-asF"/>
                             <constraint firstItem="GmY-2P-kxa" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="fUZ-fB-zJ0"/>
                             <constraint firstAttribute="trailing" secondItem="ILc-RK-VId" secondAttribute="trailing" id="fgl-fu-IXb"/>
                             <constraint firstItem="4Z6-tH-GNv" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="ggt-yh-8zO"/>
@@ -78,6 +85,7 @@
                         <outlet property="ai_loader" destination="GmY-2P-kxa" id="1ak-N6-8sb"/>
                         <outlet property="backButton" destination="foA-bb-di7" id="HyR-Ft-chy"/>
                         <outlet property="forwardButton" destination="ioX-G5-ZnO" id="5fW-Tp-Tzf"/>
+                        <outlet property="launchScreenImage" destination="zL5-vE-sQJ" id="cQw-Qy-9Om"/>
                         <outlet property="mainWebview" destination="4Z6-tH-GNv" id="kG3-Xg-LAH"/>
                         <outlet property="refreshButton" destination="Q2f-B6-j7c" id="zlZ-bx-TxP"/>
                     </connections>
@@ -87,4 +95,7 @@
             <point key="canvasLocation" x="24.800000000000001" y="36.431784107946029"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="SplashImage" width="320" height="480"/>
+    </resources>
 </document>
