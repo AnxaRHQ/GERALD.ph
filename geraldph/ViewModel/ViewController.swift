@@ -160,7 +160,7 @@ class ViewController: UIViewController, UIWebViewDelegate
         
         self.updateButtons()
         
-        let when = DispatchTime.now() + 5
+        let when = DispatchTime.now() + 3
         
         DispatchQueue.main.asyncAfter(deadline: when)
         {
