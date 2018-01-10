@@ -6,7 +6,12 @@
 //  Copyright © 2017 HAPILABS LIMITED. All rights reserved.
 //
 
-static NSString * const landingPageLiveURL  = @"http://shop.gerald.ph/";
-static NSString * const landingPageQCURL    = @"http://qc.shop.gerald.ph/";
+static NSString * const landingPageLiveURL      = @"http://shop.gerald.ph/";
+static NSString * const landingPageQCURL        = @"http://qc.shop.gerald.ph/";
 
-static NSString * const appName             = @"GERALD.ph";
+static NSString * const anxamatsLiveURL         = @"http://api.anxa.com/";
+static NSString * const anxamatsQCURL           = @"http://qc.api.anxa.com/";
+
+static NSString * const appName                 = @"GERALD.ph";
+
+static NSString * const anxamatsApplicationID   = @"2111";

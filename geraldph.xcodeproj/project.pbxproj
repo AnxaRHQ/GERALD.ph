@@ -8,18 +8,25 @@
 
 /* Begin PBXBuildFile section */
 		599AF6C7EA5B4886EB8D71D5 /* Pods_geraldph.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58DAC0155019020833E2B874 /* Pods_geraldph.framework */; };
+		C6155F622004689E00981726 /* AnxaSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6155F612004689E00981726 /* AnxaSession.swift */; };
+		C6155F64200468C500981726 /* SessionHTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6155F63200468C500981726 /* SessionHTTPClient.swift */; };
+		C6155F66200468F200981726 /* CalendarUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6155F65200468F200981726 /* CalendarUtil.swift */; };
+		C6155F682004690D00981726 /* JsonRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6155F672004690D00981726 /* JsonRequest.swift */; };
 		C6BDCC961F43DF74000A9BD5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6BDCC951F43DF74000A9BD5 /* AppDelegate.swift */; };
 		C6BDCCA01F43DF74000A9BD5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C6BDCC9F1F43DF74000A9BD5 /* Assets.xcassets */; };
 		C6BDCCB01F43E816000A9BD5 /* geraldph.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C6BDCCAC1F43E816000A9BD5 /* geraldph.xcdatamodeld */; };
 		C6BDCCB11F43E816000A9BD5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6BDCCAF1F43E816000A9BD5 /* ViewController.swift */; };
 		C6BDCCB41F43E828000A9BD5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C6BDCCB21F43E828000A9BD5 /* Main.storyboard */; };
-		C6E1CB8E1F4FB63A00578F2F /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C6E1CB8C1F4FB63A00578F2F /* Launch Screen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		11BBF0F979B96049E4A76A97 /* Pods-geraldph.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-geraldph.release.xcconfig"; path = "Pods/Target Support Files/Pods-geraldph/Pods-geraldph.release.xcconfig"; sourceTree = "<group>"; };
 		58DAC0155019020833E2B874 /* Pods_geraldph.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_geraldph.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D156E8B77771BAC5B8BB22C /* Pods-geraldph.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-geraldph.debug.xcconfig"; path = "Pods/Target Support Files/Pods-geraldph/Pods-geraldph.debug.xcconfig"; sourceTree = "<group>"; };
+		C6155F612004689E00981726 /* AnxaSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnxaSession.swift; sourceTree = "<group>"; };
+		C6155F63200468C500981726 /* SessionHTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionHTTPClient.swift; sourceTree = "<group>"; };
+		C6155F65200468F200981726 /* CalendarUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarUtil.swift; sourceTree = "<group>"; };
+		C6155F672004690D00981726 /* JsonRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonRequest.swift; sourceTree = "<group>"; };
 		C63303BB1F442599007C251F /* geraldph-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "geraldph-Bridging-Header.h"; sourceTree = "<group>"; };
 		C63303BC1F442599007C251F /* Global.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Global.h; sourceTree = "<group>"; };
 		C6BDCC921F43DF74000A9BD5 /* geraldph.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = geraldph.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -29,7 +36,6 @@
 		C6BDCCAD1F43E816000A9BD5 /* geraldph.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = geraldph.xcdatamodel; sourceTree = "<group>"; };
 		C6BDCCAF1F43E816000A9BD5 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		C6BDCCB31F43E828000A9BD5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		C6E1CB8D1F4FB63A00578F2F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "Base.lproj/Launch Screen.storyboard"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +67,17 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		C6155F602004687B00981726 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C6155F612004689E00981726 /* AnxaSession.swift */,
+				C6155F63200468C500981726 /* SessionHTTPClient.swift */,
+				C6155F65200468F200981726 /* CalendarUtil.swift */,
+				C6155F672004690D00981726 /* JsonRequest.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		C6BDCC891F43DF74000A9BD5 = {
 			isa = PBXGroup;
 			children = (
@@ -90,6 +107,7 @@
 				C6BDCCAB1F43E816000A9BD5 /* Model */,
 				C6BDCCAA1F43E800000A9BD5 /* View */,
 				C6BDCCAE1F43E816000A9BD5 /* ViewModel */,
+				C6155F602004687B00981726 /* Controller */,
 			);
 			path = geraldph;
 			sourceTree = "<group>";
@@ -98,7 +116,6 @@
 			isa = PBXGroup;
 			children = (
 				C6BDCCB21F43E828000A9BD5 /* Main.storyboard */,
-				C6E1CB8C1F4FB63A00578F2F /* Launch Screen.storyboard */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -150,13 +167,13 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0830;
-				LastUpgradeCheck = 0830;
+				LastUpgradeCheck = 0920;
 				ORGANIZATIONNAME = "HAPILABS LIMITED";
 				TargetAttributes = {
 					C6BDCC911F43DF74000A9BD5 = {
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = 4YXJXL374U;
-						LastSwiftMigration = 0830;
+						LastSwiftMigration = 0920;
 						ProvisioningStyle = Manual;
 					};
 				};
@@ -184,7 +201,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C6E1CB8E1F4FB63A00578F2F /* Launch Screen.storyboard in Resources */,
 				C6BDCCA01F43DF74000A9BD5 /* Assets.xcassets in Resources */,
 				C6BDCCB41F43E828000A9BD5 /* Main.storyboard in Resources */,
 			);
@@ -214,9 +230,12 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-geraldph/Pods-geraldph-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -229,13 +248,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-geraldph-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		C68D5FDF1F4436530059B410 /* ShellScript */ = {
@@ -258,9 +280,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C6155F622004689E00981726 /* AnxaSession.swift in Sources */,
 				C6BDCCB11F43E816000A9BD5 /* ViewController.swift in Sources */,
 				C6BDCCB01F43E816000A9BD5 /* geraldph.xcdatamodeld in Sources */,
+				C6155F64200468C500981726 /* SessionHTTPClient.swift in Sources */,
 				C6BDCC961F43DF74000A9BD5 /* AppDelegate.swift in Sources */,
+				C6155F66200468F200981726 /* CalendarUtil.swift in Sources */,
+				C6155F682004690D00981726 /* JsonRequest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -273,14 +299,6 @@
 				C6BDCCB31F43E828000A9BD5 /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		C6E1CB8C1F4FB63A00578F2F /* Launch Screen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				C6E1CB8D1F4FB63A00578F2F /* Base */,
-			);
-			name = "Launch Screen.storyboard";
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -296,7 +314,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -304,7 +324,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -347,7 +371,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -355,7 +381,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -386,19 +416,23 @@
 			baseConfigurationReference = 9D156E8B77771BAC5B8BB22C /* Pods-geraldph.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 4YXJXL374U;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = geraldph/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hapilabs.geraldph;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "61d10c72-9ed4-4e5c-b899-1a770f023498";
+				PROVISIONING_PROFILE = "8650bba6-4e2b-4aa1-8b4a-7ec1990c4523";
 				PROVISIONING_PROFILE_SPECIFIER = "Gerald PH App Store";
 				SWIFT_OBJC_BRIDGING_HEADER = "geraldph/geraldph-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -407,18 +441,22 @@
 			baseConfigurationReference = 11BBF0F979B96049E4A76A97 /* Pods-geraldph.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 4YXJXL374U;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = geraldph/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hapilabs.geraldph;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "61d10c72-9ed4-4e5c-b899-1a770f023498";
+				PROVISIONING_PROFILE = "8650bba6-4e2b-4aa1-8b4a-7ec1990c4523";
 				PROVISIONING_PROFILE_SPECIFIER = "Gerald PH App Store";
 				SWIFT_OBJC_BRIDGING_HEADER = "geraldph/geraldph-Bridging-Header.h";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};

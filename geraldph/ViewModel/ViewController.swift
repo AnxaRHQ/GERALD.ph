@@ -7,26 +7,60 @@
 //
 
 import UIKit
+import WebKit
 import AFNetworking
 
-class ViewController: UIViewController, UIWebViewDelegate
+class ViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, UIScrollViewDelegate
 {
     // MARK: - IBOutlet
     
-    @IBOutlet weak var mainWebview: UIWebView!
+    @IBOutlet var tempView: UIView!
     @IBOutlet weak var ai_loader: UIActivityIndicatorView!
     @IBOutlet weak var backButton: UIBarButtonItem!
     @IBOutlet weak var forwardButton: UIBarButtonItem!
     @IBOutlet weak var refreshButton: UIBarButtonItem!
-    @IBOutlet weak var launchScreenImage: UIImageView!
+    @IBOutlet var launchScreenImage: UIImageView!
     
     // MARK: - Variables
     
+    var mainWebview : WKWebView!
+    
     // MARK: - View Management
+    
+    required init(coder aDecoder: NSCoder)
+    {
+        mainWebview = WKWebView(frame: .zero)
+        super.init(coder: aDecoder)!
+    }
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        
+        /*Add Delegates*/
+        
+        mainWebview.uiDelegate = self
+        mainWebview.navigationDelegate = self
+        mainWebview.scrollView.delegate = self
+        
+        /*Add WKWebView to View*/
+        
+        tempView.layoutIfNeeded()
+        
+        var minusiPhoneXHeight : CGFloat = 0.0
+        
+        if UIScreen.main.nativeBounds.height == 2436
+        {
+            minusiPhoneXHeight = 25
+        }
+        
+        mainWebview.frame = CGRect(x: 0, y: UIApplication.shared.statusBarFrame.size.height, width: tempView.frame.size.width, height: tempView.frame.size.height - UIApplication.shared.statusBarFrame.size.height - minusiPhoneXHeight)
+        
+        mainWebview.isHidden = true
+        
+        view.addSubview(mainWebview)
+        
+        mainWebview.addSubview(ai_loader)
         
         /*Load Activity Indicator*/
         
@@ -78,7 +112,7 @@ class ViewController: UIViewController, UIWebViewDelegate
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AFNetworkingReachabilityDidChange, object: nil)
     }
     
-    func checkInternetConnection()
+    @objc func checkInternetConnection()
     {
         DispatchQueue.main.async
         {
@@ -112,7 +146,7 @@ class ViewController: UIViewController, UIWebViewDelegate
                 
                 self.mainWebview.reload()
                 
-                if (self.mainWebview.request?.url?.absoluteString.characters.count == 0)
+                if (self.mainWebview.url?.absoluteString == nil)
                 {
                     self.loadURL()
                 }
@@ -127,34 +161,37 @@ class ViewController: UIViewController, UIWebViewDelegate
         let requestURL = NSURL(string:landingPageLiveURL)
         let request : NSMutableURLRequest = NSMutableURLRequest.init(url: requestURL! as URL)
         
-        /*Allow Unverified SSL Certificate*/
+        mainWebview.allowsBackForwardNavigationGestures = true
         
-        mainWebview.sessionManager.securityPolicy.allowInvalidCertificates  = true
-        
-        mainWebview.sessionManager.securityPolicy.validatesDomainName       = false
-        
-        var userAgent = mainWebview.stringByEvaluatingJavaScript(from: "navigator.userAgent")
+        var userAgent = UIWebView().stringByEvaluatingJavaScript(from: "navigator.userAgent")
         
         /*set new value for user agent*/
         userAgent = NSString(format: "%@/%@ %@ Mobile %@", "GERALD.ph", Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as! NSString, deviceName(), userAgent!) as String
         
         //print("userAgent: \(String(describing: userAgent))")
         
-        /*Load URL*/
+        mainWebview.customUserAgent = userAgent
         
-        request.setValue(userAgent, forHTTPHeaderField: "User-Agent")
-        
-        mainWebview.loadRequest(request as URLRequest)
+        mainWebview.load(request as URLRequest)
     }
     
-    // MARK: - UIWebView Delegate Methods
+    // MARK: - ScrollView Delegate Methods
     
-    func webViewDidStartLoad(_ webView: UIWebView)
+    func viewForZooming(in: UIScrollView) -> UIView?
+    {
+        /*Disable zooming in WKWebView*/
+        
+        return nil;
+    }
+    
+    // MARK: - WKWebView Delegate Methods
+    
+    func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!)
     {
         self.updateButtons()
     }
     
-    func webViewDidFinishLoad(_ webView: UIWebView)
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!)
     {
         self.stopAILoader()
         
@@ -165,14 +202,18 @@ class ViewController: UIViewController, UIWebViewDelegate
         DispatchQueue.main.asyncAfter(deadline: when)
         {
             /*Hide UIImage*/
-        
+            
             self.launchScreenImage.isHidden = true
+            
+            /*Unhide WebView*/
+            
+            self.mainWebview.isHidden = false
         }
     }
     
-    func webView(_ webView: UIWebView, didFailLoadWithError error: Error)
+    func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error)
     {
-        print("webView-url: \(String(describing: webView.request?.url?.absoluteString))")
+        print("webView-url: \(String(describing: webView.url?.absoluteString))")
         
         self.stopAILoader()
         
@@ -186,6 +227,32 @@ class ViewController: UIViewController, UIWebViewDelegate
         {
             print("error: \(error.localizedDescription)")
         }
+    }
+    
+    func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error)
+    {
+        print("webView-url: \(String(describing: webView.url?.absoluteString))")
+        
+        self.stopAILoader()
+        
+        self.updateButtons()
+        
+        if ((error as NSError).code == NSURLErrorNetworkConnectionLost || (error as NSError).code == NSURLErrorNotConnectedToInternet)
+        {
+            self.displayAlert(title: "", message: error.localizedDescription)
+        }
+        else
+        {
+            print("error: \(error.localizedDescription)")
+        }
+    }
+    
+    func webView(_ webView: WKWebView, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void)
+    {
+        /*Allow Unverified SSL Certificate*/
+        
+        let cred = URLCredential(trust: challenge.protectionSpace.serverTrust!)
+        completionHandler(.useCredential, cred)
     }
     
     // MARK: - Button Actions
