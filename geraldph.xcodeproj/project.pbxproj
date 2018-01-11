@@ -8,10 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		599AF6C7EA5B4886EB8D71D5 /* Pods_geraldph.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58DAC0155019020833E2B874 /* Pods_geraldph.framework */; };
-		C6155F622004689E00981726 /* AnxaSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6155F612004689E00981726 /* AnxaSession.swift */; };
-		C6155F64200468C500981726 /* SessionHTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6155F63200468C500981726 /* SessionHTTPClient.swift */; };
-		C6155F66200468F200981726 /* CalendarUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6155F65200468F200981726 /* CalendarUtil.swift */; };
-		C6155F682004690D00981726 /* JsonRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6155F672004690D00981726 /* JsonRequest.swift */; };
 		C6BDCC961F43DF74000A9BD5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6BDCC951F43DF74000A9BD5 /* AppDelegate.swift */; };
 		C6BDCCA01F43DF74000A9BD5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C6BDCC9F1F43DF74000A9BD5 /* Assets.xcassets */; };
 		C6BDCCB01F43E816000A9BD5 /* geraldph.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C6BDCCAC1F43E816000A9BD5 /* geraldph.xcdatamodeld */; };
@@ -23,10 +19,6 @@
 		11BBF0F979B96049E4A76A97 /* Pods-geraldph.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-geraldph.release.xcconfig"; path = "Pods/Target Support Files/Pods-geraldph/Pods-geraldph.release.xcconfig"; sourceTree = "<group>"; };
 		58DAC0155019020833E2B874 /* Pods_geraldph.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_geraldph.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D156E8B77771BAC5B8BB22C /* Pods-geraldph.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-geraldph.debug.xcconfig"; path = "Pods/Target Support Files/Pods-geraldph/Pods-geraldph.debug.xcconfig"; sourceTree = "<group>"; };
-		C6155F612004689E00981726 /* AnxaSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnxaSession.swift; sourceTree = "<group>"; };
-		C6155F63200468C500981726 /* SessionHTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionHTTPClient.swift; sourceTree = "<group>"; };
-		C6155F65200468F200981726 /* CalendarUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarUtil.swift; sourceTree = "<group>"; };
-		C6155F672004690D00981726 /* JsonRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonRequest.swift; sourceTree = "<group>"; };
 		C63303BB1F442599007C251F /* geraldph-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "geraldph-Bridging-Header.h"; sourceTree = "<group>"; };
 		C63303BC1F442599007C251F /* Global.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Global.h; sourceTree = "<group>"; };
 		C6BDCC921F43DF74000A9BD5 /* geraldph.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = geraldph.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -67,17 +59,6 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		C6155F602004687B00981726 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				C6155F612004689E00981726 /* AnxaSession.swift */,
-				C6155F63200468C500981726 /* SessionHTTPClient.swift */,
-				C6155F65200468F200981726 /* CalendarUtil.swift */,
-				C6155F672004690D00981726 /* JsonRequest.swift */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
 		C6BDCC891F43DF74000A9BD5 = {
 			isa = PBXGroup;
 			children = (
@@ -107,7 +88,6 @@
 				C6BDCCAB1F43E816000A9BD5 /* Model */,
 				C6BDCCAA1F43E800000A9BD5 /* View */,
 				C6BDCCAE1F43E816000A9BD5 /* ViewModel */,
-				C6155F602004687B00981726 /* Controller */,
 			);
 			path = geraldph;
 			sourceTree = "<group>";
@@ -280,13 +260,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C6155F622004689E00981726 /* AnxaSession.swift in Sources */,
 				C6BDCCB11F43E816000A9BD5 /* ViewController.swift in Sources */,
 				C6BDCCB01F43E816000A9BD5 /* geraldph.xcdatamodeld in Sources */,
-				C6155F64200468C500981726 /* SessionHTTPClient.swift in Sources */,
 				C6BDCC961F43DF74000A9BD5 /* AppDelegate.swift in Sources */,
-				C6155F66200468F200981726 /* CalendarUtil.swift in Sources */,
-				C6155F682004690D00981726 /* JsonRequest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
