@@ -25,6 +25,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate
         
         Fabric.with([Crashlytics.self])
         
+        /* Navigation Bar */
+        
+        UINavigationBar.appearance().backgroundColor = UIColor.white
+        UINavigationBar.appearance().barTintColor = UIColor.white
+        
         return true
     }
 

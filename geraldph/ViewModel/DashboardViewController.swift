@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  DashboardViewController.swift
 //  geraldph
 //
 //  Created by Elaine Reyes on 16/08/2017.
@@ -10,20 +10,20 @@ import UIKit
 import WebKit
 import AFNetworking
 
-class ViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, UIScrollViewDelegate
+class DashboardViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, UIScrollViewDelegate
 {
-    // MARK: - IBOutlet
+    // MARK: - IBOutlets
     
     @IBOutlet var tempView: UIView!
     @IBOutlet weak var ai_loader: UIActivityIndicatorView!
     @IBOutlet weak var backButton: UIBarButtonItem!
     @IBOutlet weak var forwardButton: UIBarButtonItem!
     @IBOutlet weak var refreshButton: UIBarButtonItem!
-    @IBOutlet var launchScreenImage: UIImageView!
     
     // MARK: - Variables
     
     var mainWebview : WKWebView!
+    var urlToLoad = "";
     
     // MARK: - View Management
     
@@ -45,6 +45,23 @@ class ViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, UISc
         
         /*Add WKWebView to View*/
         
+        self.addWKWebViewToView()
+        
+        /*Load Activity Indicator*/
+        
+        self.startAILoader()
+        
+        /*Load WebView*/
+        
+        self.loadURL()
+        
+        /*Customize Navigation Bar Title Attributes*/
+        
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor :  UIColor.init(red: 51/255, green: 132/255, blue: 51/255, alpha: 1.0)]
+    }
+    
+    func addWKWebViewToView()
+    {
         tempView.layoutIfNeeded()
         
         var minusiPhoneXHeight : CGFloat = 0.0
@@ -56,19 +73,9 @@ class ViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, UISc
         
         mainWebview.frame = CGRect(x: 0, y: UIApplication.shared.statusBarFrame.size.height, width: tempView.frame.size.width, height: tempView.frame.size.height - UIApplication.shared.statusBarFrame.size.height - minusiPhoneXHeight)
         
-        mainWebview.isHidden = true
-        
         view.addSubview(mainWebview)
         
         mainWebview.addSubview(ai_loader)
-        
-        /*Load Activity Indicator*/
-        
-        self.startAILoader()
-        
-        /*Load WebView*/
-        
-        self.loadURL()
     }
     
     override func viewWillAppear(_ animated: Bool)
@@ -158,7 +165,7 @@ class ViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, UISc
     
     func loadURL()
     {
-        let requestURL = NSURL(string:landingPageLiveURL)
+        let requestURL = NSURL(string: urlToLoad)
         let request : NSMutableURLRequest = NSMutableURLRequest.init(url: requestURL! as URL)
         
         mainWebview.allowsBackForwardNavigationGestures = true
@@ -168,7 +175,7 @@ class ViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, UISc
         /*set new value for user agent*/
         userAgent = NSString(format: "%@/%@ %@ Mobile %@", "GERALD.ph", Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as! NSString, deviceName(), userAgent!) as String
         
-        //print("userAgent: \(String(describing: userAgent))")
+        print("userAgent_vc: \(String(describing: userAgent))")
         
         mainWebview.customUserAgent = userAgent
         
@@ -196,19 +203,6 @@ class ViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, UISc
         self.stopAILoader()
         
         self.updateButtons()
-        
-        let when = DispatchTime.now() + 3
-        
-        DispatchQueue.main.asyncAfter(deadline: when)
-        {
-            /*Hide UIImage*/
-            
-            self.launchScreenImage.isHidden = true
-            
-            /*Unhide WebView*/
-            
-            self.mainWebview.isHidden = false
-        }
     }
     
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error)
@@ -276,6 +270,11 @@ class ViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, UISc
     @IBAction func refreshButtonTapped(_ sender: UIBarButtonItem)
     {
         self.mainWebview.reload()
+    }
+    
+    @IBAction func closeAboutPageButtonTapped(_ sender: UIBarButtonItem)
+    {
+        self.dismiss(animated: true, completion: nil)
     }
     
     // MARK: - Activity Indicator Methods

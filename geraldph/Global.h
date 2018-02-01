@@ -9,6 +9,10 @@
 static NSString * const landingPageLiveURL      = @"http://shop.gerald.ph/";
 static NSString * const landingPageQCURL        = @"http://qc.shop.gerald.ph/";
 
+static NSString * const loginPageURL            = @"http://shop.gerald.ph/login";
+static NSString * const registrationPageURL     = @"http://shop.gerald.ph/register";
+static NSString * const aboutPageURL            = @"http://shop.gerald.ph/about-us";
+
 static NSString * const appName                 = @"GERALD.ph";
 
 static NSString * const anxamatsApplicationID   = @"2111";

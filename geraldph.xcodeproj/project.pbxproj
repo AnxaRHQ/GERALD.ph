@@ -8,10 +8,17 @@
 
 /* Begin PBXBuildFile section */
 		599AF6C7EA5B4886EB8D71D5 /* Pods_geraldph.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58DAC0155019020833E2B874 /* Pods_geraldph.framework */; };
+		C63F7CB62022A2A600B6F115 /* ContentUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63F7CB52022A2A600B6F115 /* ContentUtil.swift */; };
+		C63F7CBA2022A46D00B6F115 /* MainMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63F7CB92022A46D00B6F115 /* MainMenuTableViewCell.swift */; };
+		C63F7CBC2022FE4800B6F115 /* LandingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63F7CBB2022FE4800B6F115 /* LandingPageViewController.swift */; };
+		C63F7CBF2022FF7B00B6F115 /* GradientView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C63F7CBD2022FF7B00B6F115 /* GradientView.xib */; };
+		C63F7CC22022FFAB00B6F115 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63F7CC12022FFAB00B6F115 /* GradientView.swift */; };
+		C64348402021739D00A903D0 /* PopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C643483F2021739D00A903D0 /* PopupViewController.swift */; };
+		C64348422021747D00A903D0 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64348412021747D00A903D0 /* MenuViewController.swift */; };
 		C6BDCC961F43DF74000A9BD5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6BDCC951F43DF74000A9BD5 /* AppDelegate.swift */; };
 		C6BDCCA01F43DF74000A9BD5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C6BDCC9F1F43DF74000A9BD5 /* Assets.xcassets */; };
 		C6BDCCB01F43E816000A9BD5 /* geraldph.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C6BDCCAC1F43E816000A9BD5 /* geraldph.xcdatamodeld */; };
-		C6BDCCB11F43E816000A9BD5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6BDCCAF1F43E816000A9BD5 /* ViewController.swift */; };
+		C6BDCCB11F43E816000A9BD5 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6BDCCAF1F43E816000A9BD5 /* DashboardViewController.swift */; };
 		C6BDCCB41F43E828000A9BD5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C6BDCCB21F43E828000A9BD5 /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -21,12 +28,20 @@
 		9D156E8B77771BAC5B8BB22C /* Pods-geraldph.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-geraldph.debug.xcconfig"; path = "Pods/Target Support Files/Pods-geraldph/Pods-geraldph.debug.xcconfig"; sourceTree = "<group>"; };
 		C63303BB1F442599007C251F /* geraldph-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "geraldph-Bridging-Header.h"; sourceTree = "<group>"; };
 		C63303BC1F442599007C251F /* Global.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Global.h; sourceTree = "<group>"; };
+		C63F7CB52022A2A600B6F115 /* ContentUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentUtil.swift; sourceTree = "<group>"; };
+		C63F7CB72022A39D00B6F115 /* geraldph.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = geraldph.entitlements; sourceTree = "<group>"; };
+		C63F7CB92022A46D00B6F115 /* MainMenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuTableViewCell.swift; sourceTree = "<group>"; };
+		C63F7CBB2022FE4800B6F115 /* LandingPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingPageViewController.swift; sourceTree = "<group>"; };
+		C63F7CBE2022FF7B00B6F115 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/GradientView.xib; sourceTree = "<group>"; };
+		C63F7CC12022FFAB00B6F115 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
+		C643483F2021739D00A903D0 /* PopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupViewController.swift; sourceTree = "<group>"; };
+		C64348412021747D00A903D0 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		C6BDCC921F43DF74000A9BD5 /* geraldph.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = geraldph.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6BDCC951F43DF74000A9BD5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C6BDCC9F1F43DF74000A9BD5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C6BDCCA41F43DF74000A9BD5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C6BDCCAD1F43E816000A9BD5 /* geraldph.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = geraldph.xcdatamodel; sourceTree = "<group>"; };
-		C6BDCCAF1F43E816000A9BD5 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		C6BDCCAF1F43E816000A9BD5 /* DashboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
 		C6BDCCB31F43E828000A9BD5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -59,6 +74,31 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		C63F7CB42022A28500B6F115 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				C63F7CB52022A2A600B6F115 /* ContentUtil.swift */,
+			);
+			name = Controllers;
+			path = geraldph/Controllers;
+			sourceTree = SOURCE_ROOT;
+		};
+		C63F7CB82022A42800B6F115 /* Custom Cells */ = {
+			isa = PBXGroup;
+			children = (
+				C63F7CB92022A46D00B6F115 /* MainMenuTableViewCell.swift */,
+			);
+			path = "Custom Cells";
+			sourceTree = "<group>";
+		};
+		C63F7CC02022FF9500B6F115 /* Custom Views */ = {
+			isa = PBXGroup;
+			children = (
+				C63F7CC12022FFAB00B6F115 /* GradientView.swift */,
+			);
+			path = "Custom Views";
+			sourceTree = "<group>";
+		};
 		C6BDCC891F43DF74000A9BD5 = {
 			isa = PBXGroup;
 			children = (
@@ -80,6 +120,7 @@
 		C6BDCC941F43DF74000A9BD5 /* geraldph */ = {
 			isa = PBXGroup;
 			children = (
+				C63F7CB72022A39D00B6F115 /* geraldph.entitlements */,
 				C6BDCC951F43DF74000A9BD5 /* AppDelegate.swift */,
 				C63303BB1F442599007C251F /* geraldph-Bridging-Header.h */,
 				C63303BC1F442599007C251F /* Global.h */,
@@ -88,6 +129,7 @@
 				C6BDCCAB1F43E816000A9BD5 /* Model */,
 				C6BDCCAA1F43E800000A9BD5 /* View */,
 				C6BDCCAE1F43E816000A9BD5 /* ViewModel */,
+				C63F7CB42022A28500B6F115 /* Controllers */,
 			);
 			path = geraldph;
 			sourceTree = "<group>";
@@ -96,6 +138,7 @@
 			isa = PBXGroup;
 			children = (
 				C6BDCCB21F43E828000A9BD5 /* Main.storyboard */,
+				C63F7CBD2022FF7B00B6F115 /* GradientView.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -111,7 +154,12 @@
 		C6BDCCAE1F43E816000A9BD5 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				C6BDCCAF1F43E816000A9BD5 /* ViewController.swift */,
+				C63F7CB82022A42800B6F115 /* Custom Cells */,
+				C63F7CC02022FF9500B6F115 /* Custom Views */,
+				C63F7CBB2022FE4800B6F115 /* LandingPageViewController.swift */,
+				C643483F2021739D00A903D0 /* PopupViewController.swift */,
+				C6BDCCAF1F43E816000A9BD5 /* DashboardViewController.swift */,
+				C64348412021747D00A903D0 /* MenuViewController.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -155,6 +203,11 @@
 						DevelopmentTeam = 4YXJXL374U;
 						LastSwiftMigration = 0920;
 						ProvisioningStyle = Manual;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 0;
+							};
+						};
 					};
 				};
 			};
@@ -183,6 +236,7 @@
 			files = (
 				C6BDCCA01F43DF74000A9BD5 /* Assets.xcassets in Resources */,
 				C6BDCCB41F43E828000A9BD5 /* Main.storyboard in Resources */,
+				C63F7CBF2022FF7B00B6F115 /* GradientView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -212,10 +266,12 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-geraldph/Pods-geraldph-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
+				"${BUILT_PRODUCTS_DIR}/SWRevealViewController/SWRevealViewController.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SWRevealViewController.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -260,15 +316,29 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C6BDCCB11F43E816000A9BD5 /* ViewController.swift in Sources */,
+				C6BDCCB11F43E816000A9BD5 /* DashboardViewController.swift in Sources */,
+				C63F7CB62022A2A600B6F115 /* ContentUtil.swift in Sources */,
+				C64348422021747D00A903D0 /* MenuViewController.swift in Sources */,
+				C63F7CBC2022FE4800B6F115 /* LandingPageViewController.swift in Sources */,
 				C6BDCCB01F43E816000A9BD5 /* geraldph.xcdatamodeld in Sources */,
 				C6BDCC961F43DF74000A9BD5 /* AppDelegate.swift in Sources */,
+				C63F7CBA2022A46D00B6F115 /* MainMenuTableViewCell.swift in Sources */,
+				C64348402021739D00A903D0 /* PopupViewController.swift in Sources */,
+				C63F7CC22022FFAB00B6F115 /* GradientView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		C63F7CBD2022FF7B00B6F115 /* GradientView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C63F7CBE2022FF7B00B6F115 /* Base */,
+			);
+			name = GradientView.xib;
+			sourceTree = "<group>";
+		};
 		C6BDCCB21F43E828000A9BD5 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -409,6 +479,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -433,6 +504,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "geraldph/geraldph-Bridging-Header.h";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

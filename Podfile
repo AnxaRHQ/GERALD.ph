@@ -11,4 +11,6 @@ target 'geraldph' do
   pod 'Fabric'
   pod 'Crashlytics'
   
+  pod 'SWRevealViewController'
+  
 end
