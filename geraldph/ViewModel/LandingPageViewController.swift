@@ -41,9 +41,13 @@ class LandingPageViewController: UIViewController
         
         self.view.layoutIfNeeded()
         
-        if UIScreen.main.bounds.height == 480
+        if UIScreen.main.bounds.size.height == 480
         {
-            logoWidth.constant = 330
+            logoWidth.constant = 275
+        }
+        else if UIScreen.main.bounds.size.height == 736
+        {
+             logoWidth.constant = 410
         }
     }
     
@@ -51,22 +55,6 @@ class LandingPageViewController: UIViewController
     {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    // MARK: - Segue
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
-    {
-        if segue.identifier == "showDashboardSegue"
-        {
-            let urlToLoad : String = (sender as? String)!
-            
-            let destinationNavigationController = segue.destination as! UINavigationController
-            let dashboardVC = destinationNavigationController.topViewController as! PopupViewController
-            dashboardVC.modalPresentationStyle = UIModalPresentationStyle.custom
-            dashboardVC.modalTransitionStyle = UIModalTransitionStyle.partialCurl
-            dashboardVC.urlToLoad = urlToLoad
-        }
     }
     
     // MARK: - Segue
@@ -80,6 +68,7 @@ class LandingPageViewController: UIViewController
                     withIdentifier: "InfoViewController")
                 ) as? DashboardViewController
             dashboardVC?.urlToLoad = aboutPageURL
+            dashboardVC?.isFromLandingPage = false
             dashboardVC?.title = "About Us"
             let navigationController = UINavigationController(rootViewController: dashboardVC!)
             present(navigationController, animated: true, completion: nil)
@@ -91,6 +80,7 @@ class LandingPageViewController: UIViewController
                     withIdentifier: "PopupViewController")
                 ) as? PopupViewController
             dashboardVC?.urlToLoad = urlToLoad
+            dashboardVC?.isFromLandingPage = true
             let navigationController = UINavigationController(rootViewController: dashboardVC!)
             navigationController.modalPresentationStyle = UIModalPresentationStyle.currentContext
             navigationController.modalTransitionStyle = UIModalTransitionStyle.crossDissolve

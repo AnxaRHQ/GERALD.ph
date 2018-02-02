@@ -19,6 +19,7 @@ class PopupViewController: SWRevealViewController, SWRevealViewControllerDelegat
     // MARK: - Variables
     
     var urlToLoad = "";
+    var isFromLandingPage = false
     
     // MARK: - View Management
     
@@ -60,6 +61,7 @@ class PopupViewController: SWRevealViewController, SWRevealViewControllerDelegat
             let navbarVC : UINavigationController = (self.rightViewController as? UINavigationController)!
             let dashboardVC = navbarVC.topViewController as? DashboardViewController
             dashboardVC?.urlToLoad = urlToLoad
+            dashboardVC?.isFromLandingPage = isFromLandingPage
         }
     }
     
@@ -109,6 +111,7 @@ class PopupViewController: SWRevealViewController, SWRevealViewControllerDelegat
                 withIdentifier: "PopupViewController")
             ) as? PopupViewController
         dashboardVC?.urlToLoad = landingPageLiveURL
+        dashboardVC?.isFromLandingPage = true
         let navigationController = UINavigationController(rootViewController: dashboardVC!)
         navigationController.modalPresentationStyle = UIModalPresentationStyle.currentContext
         navigationController.modalTransitionStyle = UIModalTransitionStyle.crossDissolve

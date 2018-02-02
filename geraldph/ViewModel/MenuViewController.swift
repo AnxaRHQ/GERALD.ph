@@ -248,6 +248,10 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
             {
                 menuCell?.collapsibleButton.isHidden = false
             }
+            
+            let separator : UIView = UIView.init(frame: CGRect(x: 0,y: 0,width: UIScreen.main.bounds.size.width,height: 1))
+            separator.backgroundColor = UIColor.init(red: 255/255, green: 255/255, blue: 255/255, alpha: 1.0)
+            menuCell?.contentView.addSubview(separator)
         }
         
         /* Sections */

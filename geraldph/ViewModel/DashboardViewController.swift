@@ -15,7 +15,10 @@ class DashboardViewController: UIViewController, WKUIDelegate, WKNavigationDeleg
     // MARK: - IBOutlets
     
     @IBOutlet var tempView: UIView!
+    @IBOutlet var noInternetConnectionView: UIView!
+    @IBOutlet var noInternetConnectionLabel: UILabel!
     @IBOutlet weak var ai_loader: UIActivityIndicatorView!
+    @IBOutlet var tryAgainButton: UIButton!
     @IBOutlet weak var backButton: UIBarButtonItem!
     @IBOutlet weak var forwardButton: UIBarButtonItem!
     @IBOutlet weak var refreshButton: UIBarButtonItem!
@@ -24,6 +27,7 @@ class DashboardViewController: UIViewController, WKUIDelegate, WKNavigationDeleg
     
     var mainWebview : WKWebView!
     var urlToLoad = "";
+    var isFromLandingPage = false
     
     // MARK: - View Management
     
@@ -37,6 +41,17 @@ class DashboardViewController: UIViewController, WKUIDelegate, WKNavigationDeleg
     {
         super.viewDidLoad()
         
+        /* Remove Navigation Bar */
+        
+        if isFromLandingPage
+        {
+            /* Remove Navigation Bar */
+            
+            self.navigationController?.isNavigationBarHidden = true
+            
+            isFromLandingPage = false
+        }
+        
         /*Add Delegates*/
         
         mainWebview.uiDelegate = self
@@ -47,6 +62,10 @@ class DashboardViewController: UIViewController, WKUIDelegate, WKNavigationDeleg
         
         self.addWKWebViewToView()
         
+        /*Hide No Internet Connection View*/
+        
+        self.hideNoInternetConnectionView()
+        
         /*Load Activity Indicator*/
         
         self.startAILoader()
@@ -54,6 +73,11 @@ class DashboardViewController: UIViewController, WKUIDelegate, WKNavigationDeleg
         /*Load WebView*/
         
         self.loadURL()
+        
+        /*Customize Try Again Button*/
+        
+        tryAgainButton.layer.masksToBounds = true
+        tryAgainButton.layer.cornerRadius = 8
         
         /*Customize Navigation Bar Title Attributes*/
         
@@ -136,6 +160,8 @@ class DashboardViewController: UIViewController, WKUIDelegate, WKNavigationDeleg
                 case .reachableViaWiFi, .reachableViaWWAN:
                     print("Reachable")
                     
+                    self.hideNoInternetConnectionView()
+                    
                     /*Load Activity Indicator*/
                     
                     self.startAILoader()
@@ -169,6 +195,7 @@ class DashboardViewController: UIViewController, WKUIDelegate, WKNavigationDeleg
         let request : NSMutableURLRequest = NSMutableURLRequest.init(url: requestURL! as URL)
         
         mainWebview.allowsBackForwardNavigationGestures = true
+        mainWebview.allowsLinkPreview = true
         
         var userAgent = UIWebView().stringByEvaluatingJavaScript(from: "navigator.userAgent")
         
@@ -203,6 +230,8 @@ class DashboardViewController: UIViewController, WKUIDelegate, WKNavigationDeleg
         self.stopAILoader()
         
         self.updateButtons()
+        
+        webView.evaluateJavaScript("document.body.style.webkitUserSelect='none';document.body.style.webkitTouchCallout='none';", completionHandler: nil)
     }
     
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error)
@@ -215,10 +244,13 @@ class DashboardViewController: UIViewController, WKUIDelegate, WKNavigationDeleg
         
         if ((error as NSError).code == NSURLErrorNetworkConnectionLost || (error as NSError).code == NSURLErrorNotConnectedToInternet)
         {
-            self.displayAlert(title: "", message: error.localizedDescription)
+            noInternetConnectionLabel.text = error.localizedDescription
+            self.unhideNoInternetConnectionView()
         }
         else
         {
+            self.hideNoInternetConnectionView()
+            
             print("error: \(error.localizedDescription)")
         }
     }
@@ -233,10 +265,13 @@ class DashboardViewController: UIViewController, WKUIDelegate, WKNavigationDeleg
         
         if ((error as NSError).code == NSURLErrorNetworkConnectionLost || (error as NSError).code == NSURLErrorNotConnectedToInternet)
         {
-            self.displayAlert(title: "", message: error.localizedDescription)
+            noInternetConnectionLabel.text = error.localizedDescription
+            self.unhideNoInternetConnectionView()
         }
         else
         {
+            self.hideNoInternetConnectionView()
+            
             print("error: \(error.localizedDescription)")
         }
     }
@@ -272,9 +307,43 @@ class DashboardViewController: UIViewController, WKUIDelegate, WKNavigationDeleg
         self.mainWebview.reload()
     }
     
+    @IBAction func closeButtonTapped(_ sender: UIButton)
+    {
+        self.mainWebview.reload()
+        
+        if (self.mainWebview.url?.absoluteString == nil)
+        {
+            self.loadURL()
+        }
+        
+        startAILoader()
+    }
+    
     @IBAction func closeAboutPageButtonTapped(_ sender: UIBarButtonItem)
     {
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    // MARK: - Hide / Unhide No Internet Connection View
+    
+    func hideNoInternetConnectionView()
+    {
+        noInternetConnectionView.isHidden = true
+        
+        view.sendSubview(toBack: noInternetConnectionView)
+        view.bringSubview(toFront: mainWebview)
+        view.bringSubview(toFront: ai_loader)
+    }
+    
+    func unhideNoInternetConnectionView()
+    {
+        noInternetConnectionView.isHidden = false
+        
+        view.sendSubview(toBack: mainWebview)
+        view.bringSubview(toFront: noInternetConnectionView)
+        view.bringSubview(toFront: ai_loader)
+        
+        stopAILoader()
     }
     
     // MARK: - Activity Indicator Methods
@@ -293,20 +362,6 @@ class DashboardViewController: UIViewController, WKUIDelegate, WKNavigationDeleg
         ai_loader.isHidden = true
         
         UIApplication.shared.isNetworkActivityIndicatorVisible = false
-    }
-    
-    // MARK: - UIAlertAction
-    
-    func displayAlert(title: String, message: String)
-    {
-        // create the alert
-        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
-        
-        // add an action (button)
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-        
-        // show the alert
-        self.present(alert, animated: true, completion: nil)
     }
     
     // MARK: - Get Device Name
