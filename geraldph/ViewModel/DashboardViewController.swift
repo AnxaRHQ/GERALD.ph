@@ -95,7 +95,14 @@ class DashboardViewController: UIViewController, WKUIDelegate, WKNavigationDeleg
             minusiPhoneXHeight = 25
         }
         
-        mainWebview.frame = CGRect(x: 0, y: UIApplication.shared.statusBarFrame.size.height, width: tempView.frame.size.width, height: tempView.frame.size.height - UIApplication.shared.statusBarFrame.size.height - minusiPhoneXHeight)
+        var toAddValue : CGFloat = 0.0
+        
+        if UIDevice.current.userInterfaceIdiom == .pad
+        {
+            toAddValue = (self.navigationController?.navigationBar.bounds.size.height)!
+        }
+        
+        mainWebview.frame = CGRect(x: 0, y: UIApplication.shared.statusBarFrame.size.height + toAddValue, width: tempView.frame.size.width, height: tempView.frame.size.height - UIApplication.shared.statusBarFrame.size.height - minusiPhoneXHeight)
         
         view.addSubview(mainWebview)
         
