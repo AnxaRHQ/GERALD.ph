@@ -15,6 +15,8 @@
 		C63F7CC22022FFAB00B6F115 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63F7CC12022FFAB00B6F115 /* GradientView.swift */; };
 		C64348402021739D00A903D0 /* PopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C643483F2021739D00A903D0 /* PopupViewController.swift */; };
 		C64348422021747D00A903D0 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64348412021747D00A903D0 /* MenuViewController.swift */; };
+		C69E49422033E8FD00B9AB42 /* AppUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69E49412033E8FD00B9AB42 /* AppUtil.swift */; };
+		C69E49442033E92F00B9AB42 /* NotificationHTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69E49432033E92F00B9AB42 /* NotificationHTTPClient.swift */; };
 		C6BDCC961F43DF74000A9BD5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6BDCC951F43DF74000A9BD5 /* AppDelegate.swift */; };
 		C6BDCCA01F43DF74000A9BD5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C6BDCC9F1F43DF74000A9BD5 /* Assets.xcassets */; };
 		C6BDCCB01F43E816000A9BD5 /* geraldph.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C6BDCCAC1F43E816000A9BD5 /* geraldph.xcdatamodeld */; };
@@ -29,13 +31,15 @@
 		C63303BB1F442599007C251F /* geraldph-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "geraldph-Bridging-Header.h"; sourceTree = "<group>"; };
 		C63303BC1F442599007C251F /* Global.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Global.h; sourceTree = "<group>"; };
 		C63F7CB52022A2A600B6F115 /* ContentUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentUtil.swift; sourceTree = "<group>"; };
-		C63F7CB72022A39D00B6F115 /* geraldph.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = geraldph.entitlements; sourceTree = "<group>"; };
 		C63F7CB92022A46D00B6F115 /* MainMenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuTableViewCell.swift; sourceTree = "<group>"; };
 		C63F7CBB2022FE4800B6F115 /* LandingPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingPageViewController.swift; sourceTree = "<group>"; };
 		C63F7CBE2022FF7B00B6F115 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/GradientView.xib; sourceTree = "<group>"; };
 		C63F7CC12022FFAB00B6F115 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		C643483F2021739D00A903D0 /* PopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupViewController.swift; sourceTree = "<group>"; };
 		C64348412021747D00A903D0 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
+		C69E49412033E8FD00B9AB42 /* AppUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUtil.swift; sourceTree = "<group>"; };
+		C69E49432033E92F00B9AB42 /* NotificationHTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationHTTPClient.swift; sourceTree = "<group>"; };
+		C69E49452034024C00B9AB42 /* geraldph.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = geraldph.entitlements; sourceTree = "<group>"; };
 		C6BDCC921F43DF74000A9BD5 /* geraldph.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = geraldph.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6BDCC951F43DF74000A9BD5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C6BDCC9F1F43DF74000A9BD5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -78,6 +82,8 @@
 			isa = PBXGroup;
 			children = (
 				C63F7CB52022A2A600B6F115 /* ContentUtil.swift */,
+				C69E49412033E8FD00B9AB42 /* AppUtil.swift */,
+				C69E49432033E92F00B9AB42 /* NotificationHTTPClient.swift */,
 			);
 			name = Controllers;
 			path = geraldph/Controllers;
@@ -120,7 +126,7 @@
 		C6BDCC941F43DF74000A9BD5 /* geraldph */ = {
 			isa = PBXGroup;
 			children = (
-				C63F7CB72022A39D00B6F115 /* geraldph.entitlements */,
+				C69E49452034024C00B9AB42 /* geraldph.entitlements */,
 				C6BDCC951F43DF74000A9BD5 /* AppDelegate.swift */,
 				C63303BB1F442599007C251F /* geraldph-Bridging-Header.h */,
 				C63303BC1F442599007C251F /* Global.h */,
@@ -204,8 +210,11 @@
 						LastSwiftMigration = 0920;
 						ProvisioningStyle = Manual;
 						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
 							com.apple.Push = {
-								enabled = 0;
+								enabled = 1;
 							};
 						};
 					};
@@ -319,10 +328,12 @@
 				C6BDCCB11F43E816000A9BD5 /* DashboardViewController.swift in Sources */,
 				C63F7CB62022A2A600B6F115 /* ContentUtil.swift in Sources */,
 				C64348422021747D00A903D0 /* MenuViewController.swift in Sources */,
+				C69E49422033E8FD00B9AB42 /* AppUtil.swift in Sources */,
 				C63F7CBC2022FE4800B6F115 /* LandingPageViewController.swift in Sources */,
 				C6BDCCB01F43E816000A9BD5 /* geraldph.xcdatamodeld in Sources */,
 				C6BDCC961F43DF74000A9BD5 /* AppDelegate.swift in Sources */,
 				C63F7CBA2022A46D00B6F115 /* MainMenuTableViewCell.swift in Sources */,
+				C69E49442033E92F00B9AB42 /* NotificationHTTPClient.swift in Sources */,
 				C64348402021739D00A903D0 /* PopupViewController.swift in Sources */,
 				C63F7CC22022FFAB00B6F115 /* GradientView.swift in Sources */,
 			);
@@ -466,6 +477,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = geraldph/geraldph.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 4YXJXL374U;
@@ -475,7 +487,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hapilabs.geraldph;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "8650bba6-4e2b-4aa1-8b4a-7ec1990c4523";
+				PROVISIONING_PROFILE = "599ef06c-c9f6-4df8-882e-a96a466176d1";
 				PROVISIONING_PROFILE_SPECIFIER = "Gerald PH App Store";
 				SWIFT_OBJC_BRIDGING_HEADER = "geraldph/geraldph-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -492,6 +504,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = geraldph/geraldph.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 4YXJXL374U;

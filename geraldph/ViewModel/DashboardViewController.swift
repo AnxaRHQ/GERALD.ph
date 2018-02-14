@@ -291,6 +291,37 @@ class DashboardViewController: UIViewController, WKUIDelegate, WKNavigationDeleg
         completionHandler(.useCredential, cred)
     }
     
+    func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void)
+    {
+        if let httpResponse = navigationResponse.response as? HTTPURLResponse
+        {
+            if let headers = httpResponse.allHeaderFields as? [String: String], let url = httpResponse.url
+            {
+                let cookies = HTTPCookie.cookies(withResponseHeaderFields: headers, for: url)
+                
+                for cookie in cookies
+                {
+                    if cookie.name == "Nop.customer"
+                    {
+                        let regID : String = cookie.value
+                        
+                        UserDefaults.standard.set(regID, forKey: "regID")
+                        
+                        print("regID: \(regID)")
+                    }
+                    
+                    print("Cookie: ",cookie.description)
+                    
+                    //print("Cookie.Name: " + cookie.name + " \nCookie.Value: " + cookie.value)
+                }
+                
+                HTTPCookieStorage.shared.setCookies(cookies , for: httpResponse.url!, mainDocumentURL: nil)
+            }
+        }
+        
+        decisionHandler(.allow)
+    }
+    
     // MARK: - Button Actions
     
     func updateButtons()
