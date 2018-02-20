@@ -514,7 +514,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hapilabs.geraldph;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "8650bba6-4e2b-4aa1-8b4a-7ec1990c4523";
+				PROVISIONING_PROFILE = "599ef06c-c9f6-4df8-882e-a96a466176d1";
 				PROVISIONING_PROFILE_SPECIFIER = "Gerald PH App Store";
 				SWIFT_OBJC_BRIDGING_HEADER = "geraldph/geraldph-Bridging-Header.h";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
