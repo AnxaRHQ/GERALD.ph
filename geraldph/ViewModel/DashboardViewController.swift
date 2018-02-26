@@ -15,17 +15,22 @@ class DashboardViewController: UIViewController, WKUIDelegate, WKNavigationDeleg
     // MARK: - IBOutlets
     
     @IBOutlet var tempView: UIView!
+    @IBOutlet var stepsCounterView: UIView!
     @IBOutlet var noInternetConnectionView: UIView!
+    @IBOutlet var stepsValueLabel: UILabel!
+    @IBOutlet var activeMinutesLabel: UILabel!
     @IBOutlet var noInternetConnectionLabel: UILabel!
     @IBOutlet weak var ai_loader: UIActivityIndicatorView!
     @IBOutlet var tryAgainButton: UIButton!
     @IBOutlet weak var backButton: UIBarButtonItem!
     @IBOutlet weak var forwardButton: UIBarButtonItem!
     @IBOutlet weak var refreshButton: UIBarButtonItem!
+    @IBOutlet var webViewToolbar: UIToolbar!
     
     // MARK: - Variables
     
     var mainWebview : WKWebView!
+    var stepCounter = StepCounter()
     var urlToLoad = "";
     var isFromLandingPage = false
     
@@ -89,20 +94,27 @@ class DashboardViewController: UIViewController, WKUIDelegate, WKNavigationDeleg
         tempView.layoutIfNeeded()
         
         var minusiPhoneXHeight : CGFloat = 0.0
+        var toolbarHeight : CGFloat = 10
+        var yValueToAdd : CGFloat = 0
+        var statusBarHeight : CGFloat = 0
         
         if UIScreen.main.nativeBounds.height == 2436
         {
             minusiPhoneXHeight = 25
+            toolbarHeight   = webViewToolbar.frame.size.height
         }
         
-        var toAddValue : CGFloat = 0.0
-        
-        if UIDevice.current.userInterfaceIdiom == .pad
+        if (stepsCounterView != nil)
         {
-            toAddValue = (self.navigationController?.navigationBar.bounds.size.height)!
+            yValueToAdd     = stepsCounterView.frame.size.height
+        }
+        else
+        {
+            statusBarHeight = UIApplication.shared.statusBarFrame.size.height
+            toolbarHeight   = webViewToolbar.frame.size.height
         }
         
-        mainWebview.frame = CGRect(x: 0, y: UIApplication.shared.statusBarFrame.size.height + toAddValue, width: tempView.frame.size.width, height: tempView.frame.size.height - UIApplication.shared.statusBarFrame.size.height - minusiPhoneXHeight)
+        mainWebview.frame = CGRect(x: 0, y: UIApplication.shared.statusBarFrame.size.height + (self.navigationController?.navigationBar.frame.size.height)! + yValueToAdd, width: tempView.frame.size.width, height: tempView.frame.size.height - minusiPhoneXHeight - statusBarHeight - toolbarHeight - yValueToAdd)
         
         view.addSubview(mainWebview)
         
@@ -113,9 +125,16 @@ class DashboardViewController: UIViewController, WKUIDelegate, WKNavigationDeleg
     {
         super.viewWillAppear(animated)
         
-        /*AFNetworking*/
+        /* AFNetworking */
         
         self.startMonitoring()
+        
+        /* Step Counter */
+        
+        if stepsCounterView != nil
+        {
+            startCurrentDayStepCounter()
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool)
@@ -411,5 +430,57 @@ class DashboardViewController: UIViewController, WKUIDelegate, WKNavigationDeleg
         let model = String(bytes: Data(bytes: &systemInfo.machine, count: Int(_SYS_NAMELEN)), encoding: .ascii)!.trimmingCharacters(in: .controlCharacters)
         
         return "Apple/\(model)"
+    }
+    
+    // MARK: - Core Motion Delegate Methods
+    
+    func startCurrentDayStepCounter()
+    {
+        stepCounter = StepCounter.shared
+        
+        if StepCounter.isStepCountingAvailable()
+        {
+            stepCounter.addObserver(self, forKeyPath: "stepsToday", options: NSKeyValueObservingOptions.new, context: nil)
+            
+            self.updateSteps(stepsToday: stepCounter.stepsToday)
+        }
+    }
+    
+    func updateSteps(stepsToday : NSInteger)
+    {
+        DispatchQueue.main.async
+            {
+                if stepsToday > 0
+                {
+                    self.stepsValueLabel.text    = "\(Int(stepsToday))"
+                    
+                    let timeMoving              = self.stepCounter.timeMoving
+                    
+                    self.activeMinutesLabel.text = "\(CalendarUtil.sharedInstance.secondsToHoursMinutesSeconds(seconds: Int(timeMoving)))"
+                }
+        }
+    }
+    
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?)
+    {
+        self.updateSteps(stepsToday: stepCounter.stepsToday)
+    }
+    
+    func stopStepCounter()
+    {
+        if stepCounter.isCounting
+        {
+            if StepCounter.isStepCountingAvailable()
+            {
+                stepCounter.addObserver(self, forKeyPath: "stepsToday", options: NSKeyValueObservingOptions.new, context: nil)
+                
+                stepCounter.removeObserver(self, forKeyPath: "stepsToday")
+            }
+        }
+    }
+    
+    func dealloc()
+    {
+        self.stopStepCounter()
     }
 }

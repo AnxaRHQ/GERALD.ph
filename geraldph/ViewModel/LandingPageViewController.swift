@@ -15,6 +15,7 @@ class LandingPageViewController: UIViewController
     @IBOutlet var discoverButton: UIButton!
     @IBOutlet var registrationButton: UIButton!
     @IBOutlet var logoWidth: NSLayoutConstraint!
+    @IBOutlet var bottomGradientConstraint: NSLayoutConstraint!
     
     // MARK: - Variables
     
@@ -48,6 +49,10 @@ class LandingPageViewController: UIViewController
         else if UIScreen.main.bounds.size.height == 736
         {
              logoWidth.constant = 410
+        }
+        else if UIScreen.main.bounds.size.height == 2436
+        {
+            bottomGradientConstraint.constant = -30
         }
     }
     
