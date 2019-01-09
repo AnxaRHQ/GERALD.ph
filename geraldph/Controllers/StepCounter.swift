@@ -66,66 +66,64 @@ public class StepCounter : NSObject
     func stepsFromDateRange(dateFrom: NSDate!, dateTo: NSDate!, withHandler callback: @escaping stepCounterData)
     {
         #if arch(i386) || arch(x86_64) && os(iOS)
-            
-            // Simulator
-            
+        
+        // Simulator
+        
         #else
-            
-            if CMPedometer.isStepCountingAvailable()
-            {
-                self._cmPedometer.queryPedometerData(from: dateFrom as Date, to: dateTo as Date, withHandler: {( pedometerData, error) -> Void in
+        
+        if CMPedometer.isStepCountingAvailable()
+        {
+            self._cmPedometer.queryPedometerData(from: dateFrom as Date, to: dateTo as Date) { (pedometerData, error) in
+                
+                var steps : NSInteger = -1
+                var distance : NSInteger = 0
+                var duration : TimeInterval = 0
+                let rawsteps : NSString = ""
+                var stepStartDate : NSDate = NSDate()
+                
+                if error == nil
+                {
+                    steps = (pedometerData?.numberOfSteps.intValue)!
+                    distance = (pedometerData?.distance!.intValue)!
                     
-                    var steps : NSInteger = -1
-                    var distance : NSInteger = 0
-                    var duration : TimeInterval = 0
-                    let rawsteps : NSString = ""
-                    var stepStartDate : NSDate = NSDate()
-                    
-                    if error == nil
-                    {
-                        steps = (pedometerData?.numberOfSteps.intValue)!
-                        distance = (pedometerData?.distance!.intValue)!
+                    self._cmMotionActivityManager.queryActivityStarting(from: dateFrom as Date, to: dateTo as Date, to: self._operationQueue) { (activities, error) in
                         
-                        self._cmMotionActivityManager.queryActivityStarting(from: dateFrom as Date, to: dateTo as Date, to: self._operationQueue, withHandler: { (activities, error) -> Void in
+                        if error == nil
+                        {
+                            var previousActivity : CMMotionActivity!
                             
-                            if error == nil {
-                                
-                                var previousActivity : CMMotionActivity!
-                                
-                                for activity in activities! {
-                                    
-                                    if previousActivity != nil {
+                            for activity in activities!
+                            {
+                                if previousActivity != nil
+                                {
+                                    if previousActivity.running || previousActivity.walking || previousActivity.cycling
+                                    {
+                                        let timeInterval : Double = activity.startDate.timeIntervalSince(previousActivity.startDate)
                                         
-                                        if previousActivity.running || previousActivity.walking || previousActivity.cycling {
-                                            
-                                            let timeInterval : Double = activity.startDate.timeIntervalSince(previousActivity.startDate)
-                                            
-                                            duration += timeInterval
-                                            
-                                            stepStartDate = CalendarUtil.convertGMTDateToLocalDate(gmtDate: activity.startDate as NSDate)
-                                            
-                                            print("stepStartDate: \(stepStartDate)")
-                                        }
+                                        duration += timeInterval
                                         
+                                        stepStartDate = CalendarUtil.convertGMTDateToLocalDate(gmtDate: activity.startDate as NSDate)
+                                        
+                                        print("stepStartDate: \(stepStartDate)")
                                     }
-                                    
-                                    previousActivity = activity
                                 }
+                                
+                                previousActivity = activity
                             }
-                            callback(dateFrom, dateTo, steps, distance, duration, stepStartDate, rawsteps)
-                        })
+                        }
+                        callback(dateFrom, dateTo, steps, distance, duration, stepStartDate, rawsteps)
                     }
-                    
-                })
-            }
-            else
-            {
+                }
                 
-                NSLog("Core Motion not supported.")
-                
-                callback(dateFrom, dateTo, -1, 0, 0, NSDate(), "")
             }
+        }
+        else
+        {
+            NSLog("Core Motion not supported.")
             
+            callback(dateFrom, dateTo, -1, 0, 0, NSDate(), "")
+        }
+        
         #endif
     }
     
@@ -133,74 +131,83 @@ public class StepCounter : NSObject
     {
         //let concurrentQueue : dispatch_queue_t  = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
         
-        self.stepsFromDateRange( dateFrom: dateFrom, dateTo: dateTo) { (from, to, steps, distance, duration, startDate, rawsteps) -> () in
+        self.stepsFromDateRange(dateFrom: dateFrom, dateTo: dateTo) { (from, to, steps, distance, duration, startDate, rawSteps) in
             
             DispatchQueue.global(qos: .default).async
                 {
                     #if arch(i386) || arch(x86_64) && os(iOS)
-                        
-                        // Simulator
-                        
+                    
+                    // Simulator
+                    
                     #else
-                        
-                        if CMPedometer.isStepCountingAvailable()
+                    
+                    if CMPedometer.isStepCountingAvailable()
+                    {
+                        if steps > 0
                         {
-                            if steps > 0
-                            {
-                                DispatchQueue.global(qos: .default).async
+                            DispatchQueue.global(qos: .default).async
+                                {
+                                    let intervalSecs = 300
+                                    var intervalStart = TimeInterval()
+                                    var intervalEnd = TimeInterval()
+                                    var sdate : NSDate
+                                    var edate : NSDate
+                                    
+                                    var rawStepsData = ""
+                                    
+                                    for index in 1...288
                                     {
-                                        let intervalSecs = 300
-                                        var intervalStart = TimeInterval()
-                                        var intervalEnd = TimeInterval()
-                                        var sdate : NSDate
-                                        var edate : NSDate
+                                        intervalStart = Double(intervalSecs * (index - 1))
+                                        intervalEnd = Double(intervalSecs * index)
                                         
-                                        var rawStepsData = ""
+                                        sdate = dateFrom.addingTimeInterval(intervalStart)
+                                        edate = dateFrom.addingTimeInterval(intervalEnd)
                                         
-                                        for index in 1...288 {
-                                            intervalStart = Double(intervalSecs * (index - 1))
-                                            intervalEnd = Double(intervalSecs * index)
+                                        self._cmPedometer.queryPedometerData(from: sdate as Date, to: edate as Date) { (data, error) in
                                             
-                                            sdate = dateFrom.addingTimeInterval(intervalStart)
-                                            edate = dateFrom.addingTimeInterval(intervalEnd)
-                                            
-                                            self._cmPedometer.queryPedometerData(from: sdate as Date, to: edate as Date, withHandler: { data, error in
-                                                
-                                                DispatchQueue.global(qos: .default).async {
-                                                    
+                                            DispatchQueue.global(qos: .default).async
+                                                {
                                                     var min : String
                                                     
                                                     //D[5mn];[Steps];[Duration];[Distance];[Kcal];
                                                     
-                                                    if index < 10 {
+                                                    if index < 10
+                                                    {
                                                         min = "D00" + "\(index - 1);"
-                                                    } else if index < 100 {
+                                                    }
+                                                    else if index < 100
+                                                    {
                                                         min = "D0" + "\(index - 1);"
-                                                    } else {
+                                                    }
+                                                    else
+                                                    {
                                                         min = "D" + "\(index - 1);"
                                                     }
                                                     
-                                                    if(error == nil){
-                                                        
+                                                    if (error == nil)
+                                                    {
                                                         rawStepsData = rawStepsData + min + "\(data!.numberOfSteps.intValue);0;" + "\(data!.distance!.intValue);0;"
                                                     }
-                                                    else {
+                                                    else
+                                                    {
                                                         rawStepsData = rawStepsData + min + "0;0;0;0;"
                                                     }
                                                     
-                                                    if index == 288 {
+                                                    if index == 288
+                                                    {
                                                         //println(" \(self.rawStepsComputed)")
-                                                        DispatchQueue.main.async {
-                                                            callback(from, to, steps, distance, duration, startDate, rawStepsData as NSString)
+                                                        DispatchQueue.main.async
+                                                            {
+                                                                callback(from, to, steps, distance, duration, startDate, rawStepsData as NSString)
                                                         }
                                                     }
-                                                }
-                                            })
+                                            }
                                         }
-                                }
+                                    }
                             }
                         }
-                        
+                    }
+                    
                     #endif
             }
         }
@@ -210,39 +217,45 @@ public class StepCounter : NSObject
     {
         let beginOfDay = CalendarUtil.getFirstHourOfDate(NSDate() as Date)
         
-        self.stepsFromDateRange( dateFrom: beginOfDay as NSDate!, dateTo: NSDate()) { (from, to, steps, distance, duration, startDate, rawsteps) -> () in
-            DispatchQueue.main.async( execute: {
-                callback(from, to, steps, distance, duration, startDate, rawsteps)
-            })
+        self.stepsFromDateRange(dateFrom: beginOfDay as NSDate, dateTo: NSDate()) { (from, to, steps, distance, duration, startDate, rawSteps) in
+            
+            DispatchQueue.main.async
+                {
+                    callback(from, to, steps, distance, duration,startDate, rawSteps)
+            }
+            
         }
     }
     
     func startStepsCounting()
     {
-        self.getStepsToday(callback: { (from: NSDate?, to : NSDate?, steps: NSInteger?, distance: NSInteger?, duration: TimeInterval, startDate: NSDate, rawsteps: NSString) -> Void in
+        self.getStepsToday { (from, to, steps, distance, duration, startDate, rawSteps) in
             
             self.timeMoving = duration
-            self.stepsToday = steps!
+            self.stepsToday = steps
             self.stepStartDate = startDate
             self.updateStepsToday()
             
             if steps != 0
             {
                 self.isCounting = true
-            }else{
+            }
+            else
+            {
                 self.isCounting = false
             }
             
-        })
+        }
     }
     
     func startActivityUpdates()
     {
         if CMMotionActivityManager.isActivityAvailable()
         {
-            _cmMotionActivityManager.startActivityUpdates(to: _operationQueue, withHandler:
-                { (activity) -> Void in
-                    DispatchQueue.main.async( execute: { () -> Void in
+            _cmMotionActivityManager.startActivityUpdates(to: _operationQueue) { (activity) in
+                
+                DispatchQueue.main.async
+                    {
                         var previousActivity : CMMotionActivity!
                         
                         if previousActivity != nil
@@ -255,8 +268,9 @@ public class StepCounter : NSObject
                             }
                         }
                         previousActivity = activity
-                    })
-            })
+                }
+                
+            }
         }
     }
     
@@ -265,25 +279,27 @@ public class StepCounter : NSObject
         let beginOfDay = CalendarUtil.getFirstHourOfDate(NSDate() as Date)
         
         #if arch(i386) || arch(x86_64) && os(iOS)
-            
-            // Simulator
-            
+        
+        // Simulator
+        
         #else
-            
-            if CMPedometer.isStepCountingAvailable()
-            {
-                self._cmPedometer.startUpdates(from: beginOfDay, withHandler: { ( pedometerData, error) -> Void in
-                    if error == nil
-                    {
-                        self.updatePedometerData(pedometerData: pedometerData)
-                    }
-                })
-            } else
-            {
-                NSLog("Core Motion not supported.")
-                self.updatePedometerData(pedometerData: nil)
+        
+        if CMPedometer.isStepCountingAvailable()
+        {
+            self._cmPedometer.startUpdates(from: beginOfDay) { (pedometerData, error) in
+                
+                if error == nil
+                {
+                    self.updatePedometerData(pedometerData: pedometerData)
+                }
+                
             }
-            
+        } else
+        {
+            NSLog("Core Motion not supported.")
+            self.updatePedometerData(pedometerData: nil)
+        }
+        
         #endif
     }
     
@@ -291,11 +307,11 @@ public class StepCounter : NSObject
     {
         if pedometerData != nil
         {
-            DispatchQueue.main.async( execute:
+            DispatchQueue.main.async
                 {
                     print("numberOfSteps: \(pedometerData.numberOfSteps)")
                     self.stepsToday = NSInteger(exactly: pedometerData.numberOfSteps)!
-            })
+            }
         }
         else
         {

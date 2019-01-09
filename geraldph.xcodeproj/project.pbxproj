@@ -19,6 +19,7 @@
 		C64348422021747D00A903D0 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64348412021747D00A903D0 /* MenuViewController.swift */; };
 		C69E49422033E8FD00B9AB42 /* AppUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69E49412033E8FD00B9AB42 /* AppUtil.swift */; };
 		C69E49442033E92F00B9AB42 /* NotificationHTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69E49432033E92F00B9AB42 /* NotificationHTTPClient.swift */; };
+		C6B3A49D21E47A3E00E3C731 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C6B3A49C21E47A3D00E3C731 /* GoogleService-Info.plist */; };
 		C6BDCC961F43DF74000A9BD5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6BDCC951F43DF74000A9BD5 /* AppDelegate.swift */; };
 		C6BDCCA01F43DF74000A9BD5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C6BDCC9F1F43DF74000A9BD5 /* Assets.xcassets */; };
 		C6BDCCB01F43E816000A9BD5 /* geraldph.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C6BDCCAC1F43E816000A9BD5 /* geraldph.xcdatamodeld */; };
@@ -44,6 +45,7 @@
 		C69E49412033E8FD00B9AB42 /* AppUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUtil.swift; sourceTree = "<group>"; };
 		C69E49432033E92F00B9AB42 /* NotificationHTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationHTTPClient.swift; sourceTree = "<group>"; };
 		C69E49452034024C00B9AB42 /* geraldph.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = geraldph.entitlements; sourceTree = "<group>"; };
+		C6B3A49C21E47A3D00E3C731 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C6BDCC921F43DF74000A9BD5 /* geraldph.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = geraldph.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6BDCC951F43DF74000A9BD5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C6BDCC9F1F43DF74000A9BD5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -138,6 +140,7 @@
 				C63303BC1F442599007C251F /* Global.h */,
 				C6BDCC9F1F43DF74000A9BD5 /* Assets.xcassets */,
 				C6BDCCA41F43DF74000A9BD5 /* Info.plist */,
+				C6B3A49C21E47A3D00E3C731 /* GoogleService-Info.plist */,
 				C6BDCCAB1F43E816000A9BD5 /* Model */,
 				C6BDCCAA1F43E800000A9BD5 /* View */,
 				C6BDCCAE1F43E816000A9BD5 /* ViewModel */,
@@ -207,13 +210,13 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0830;
-				LastUpgradeCheck = 0920;
+				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = "HAPILABS LIMITED";
 				TargetAttributes = {
 					C6BDCC911F43DF74000A9BD5 = {
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = 4YXJXL374U;
-						LastSwiftMigration = 0920;
+						LastSwiftMigration = 1010;
 						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
@@ -250,6 +253,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C6BDCCA01F43DF74000A9BD5 /* Assets.xcassets in Resources */,
+				C6B3A49D21E47A3E00E3C731 /* GoogleService-Info.plist in Resources */,
 				C6BDCCB41F43E828000A9BD5 /* Main.storyboard in Resources */,
 				C63F7CBF2022FF7B00B6F115 /* GradientView.xib in Resources */,
 			);
@@ -383,6 +387,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -390,6 +395,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -417,7 +423,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -441,6 +447,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -448,6 +455,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -469,7 +477,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -499,8 +507,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "Gerald PH App Store";
 				SWIFT_OBJC_BRIDGING_HEADER = "geraldph/geraldph-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -525,8 +532,7 @@
 				PROVISIONING_PROFILE = "599ef06c-c9f6-4df8-882e-a96a466176d1";
 				PROVISIONING_PROFILE_SPECIFIER = "Gerald PH App Store";
 				SWIFT_OBJC_BRIDGING_HEADER = "geraldph/geraldph-Bridging-Header.h";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

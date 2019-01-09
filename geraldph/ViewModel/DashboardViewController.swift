@@ -86,7 +86,7 @@ class DashboardViewController: UIViewController, WKUIDelegate, WKNavigationDeleg
         
         /*Customize Navigation Bar Title Attributes*/
         
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor :  UIColor.init(red: 51/255, green: 132/255, blue: 51/255, alpha: 1.0)]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor :  UIColor.init(red: 51/255, green: 132/255, blue: 51/255, alpha: 1.0)]
     }
     
     func addWKWebViewToView()
@@ -387,18 +387,18 @@ class DashboardViewController: UIViewController, WKUIDelegate, WKNavigationDeleg
     {
         noInternetConnectionView.isHidden = true
         
-        view.sendSubview(toBack: noInternetConnectionView)
-        view.bringSubview(toFront: mainWebview)
-        view.bringSubview(toFront: ai_loader)
+        view.sendSubviewToBack(noInternetConnectionView)
+        view.bringSubviewToFront(mainWebview)
+        view.bringSubviewToFront(ai_loader)
     }
     
     func unhideNoInternetConnectionView()
     {
         noInternetConnectionView.isHidden = false
         
-        view.sendSubview(toBack: mainWebview)
-        view.bringSubview(toFront: noInternetConnectionView)
-        view.bringSubview(toFront: ai_loader)
+        view.sendSubviewToBack(mainWebview)
+        view.bringSubviewToFront(noInternetConnectionView)
+        view.bringSubviewToFront(ai_loader)
         
         stopAILoader()
     }

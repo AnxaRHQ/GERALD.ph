@@ -46,8 +46,8 @@ class PopupViewController: SWRevealViewController, SWRevealViewControllerDelegat
         let logoImage : UIImage = UIImage(named: "nav_logo")!
         let logoImageView : UIImageView = UIImageView(image: logoImage)
         let navLogoButton = UIButton.init(frame: logoImageView.frame)
-        navLogoButton.setImage(logoImage, for: UIControlState.normal)
-        navLogoButton.addTarget(self, action: #selector(logoButtonTapped(_:)), for: UIControlEvents.touchUpInside)
+        navLogoButton.setImage(logoImage, for: UIControl.State.normal)
+        navLogoButton.addTarget(self, action: #selector(logoButtonTapped(_:)), for: UIControl.Event.touchUpInside)
         self.navigationItem.titleView = navLogoButton
         
         /*Add Custom UIView at UINavigationBar*/
